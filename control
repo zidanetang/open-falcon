@@ -1,0 +1,20 @@
+#!/bin/bash
+case "$1" in
+   start)
+         # Start daemon.
+         echo -n "Starting custom-monitor: "
+         ;;
+   stop)
+         # Stop daemons.
+         echo -n "Shutting custom-monitor: "
+	 PID=`ps -ef|grep push.py|grep -v grep|awk {'print$2'}`
+         kill -9 $PID
+         ;;
+   restart)
+         $0 stop
+         $0 start
+         ;;
+   *)
+         echo "Usage: $0 {start|stop|restart}"
+         exit 1
+esac
